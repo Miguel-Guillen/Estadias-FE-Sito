@@ -1,0 +1,129 @@
+<div class="bg-fondo">
+    <section class="d-flex align-items-center justify-content-center min-vh-100">
+        <div class="card">
+            <div class="row">
+                <div class="col-12 p-5">
+                    <h2>Sistema de Información Táctico Operativo</h2>
+                    <p class="text-muted">Ingresar credenciales</p>
+    
+                    <div *ngIf="formValid == false && !recoverForm.valid" class="alert alert-danger mt-3" role="alert">
+                        ¡Error! El usuario o contraseña son incorrectos
+                    </div>
+                    <div *ngIf="formValid && !loginForm.valid" class="alert alert-warning mt-3" role="alert">
+                        Debe proporcionar el usuario y contraseña
+                    </div>
+    
+                    <div class="mt-3">
+                        <form [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">
+                            <div class="d-flex my-3">
+                                <span class="border rounded-start icon">
+                                    <i class="fas fa-user"></i>
+                                </span>
+                                <input formControlName="user" class="form-control" type="text" 
+                                placeholder="Usuario" maxlength="10">
+                            </div>
+                            <div class="d-flex my-3">
+                                <span class="border rounded-start icon">
+                                    <i class="fas fa-lock"></i>
+                                </span>
+                                <input formControlName="password" class="form-control" type="password"
+                                placeholder="Contraseña" maxlength="50">
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <button class="btn btn-primary" type="submit">Iniciar Sesión</button>
+                                <button class="btn text-primary" type="button" data-bs-toggle="modal" 
+                                data-bs-target="#forgottenPassword">¿Olvidaste la contraseña?</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="bg-footer border-top text-center p-3">
+        <p>Universidad Tecnológica de Aguascalientes © 2016</p>
+        <p class="mt-1 mb-0">Blvd. Juan Pablo II 1302, Fracc. Ex Hacienda la Cantera, C.P. 20200. Aguascalientes, Ags.</p>
+        <p class="mt-0 mb-1">Soporte al teléfono: 449.910.50.00 ext. 135 y 138 de 8 a 20 hrs.</p>
+    </footer>
+</div>
+
+<!-- Modal forgot password -->
+<div class="modal fade" id="forgottenPassword" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fs-5 text-info">Problemas con mi cuenta</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                (click)="reset()"></button>
+            </div>
+            <ng-container *ngIf="!show; else forgottenPass">
+                <div class="modal-body">
+                    <div *ngIf="formValid == false" class="alert alert-danger" role="alert">
+                        Por favor verifícalo, he inténtalo nuevamente
+                    </div>
+                    <p class="text-info">Mi cuenta aparece desactivada:</p>
+                    <form [formGroup]="recoverForm" (ngSubmit)="recoverAccount(recoverForm.value)">
+                        <div class="d-flex my-3">
+                            <span class="border rounded-start icon">
+                                <i class="fas fa-user"></i>
+                            </span>
+                            <input formControlName="user" class="form-control" type="text" 
+                            placeholder="Ingresa el usuario con el que ingresas al sistema" maxlength="10">
+                        </div>
+                        <div class="d-flex my-3">
+                            <span class="border rounded-start icon">
+                                <i class="fas fa-calendar"></i>
+                            </span>
+                            <input formControlName="date" class="form-control" type="date">
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <button class="btn btn-purple btn-sm" type="submit">
+                                <i class="fas fa-check me-1"></i>
+                                Activar cuenta
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <div class="d-flex align-items-center w-100 my-3">
+                        <span class="text-info text-small me-4">No recuerdo la contraseña: </span>
+                        <button class="btn btn-primary btn-sm" (click)="show = !show">
+                            <i class="fas fa-envelope me-1"></i>
+                            Recuperar Contraseña
+                        </button>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</div>
+
+<ng-template #forgottenPass>
+    <div class="modal-body">
+        <div class="bg-purple mt-3 p-3">
+            <h6>Recuperar Contraseña</h6>
+            <p class="mt-2 mb-1">Inserte su matricula, haz clic en la casilla y haz clic en enviar email</p>
+        </div>
+
+        <div class="d-flex mt-3">
+            <span class="border rounded-start icon">
+                <i class="fas fa-user"></i>
+            </span>
+            <input [(ngModel)]="matricula" class="form-control" type="text" maxlength="10"
+            placeholder="Escribe tu Matricula">
+        </div>
+
+        <div class="row my-4">
+            <div class="col-6">
+                <div class="bg-light border p-3">
+                    <span>Captcha</span>
+                </div>
+            </div>
+            <div class="col-6">
+                <button class="btn btn-primary py-3" style="font-size: 15px;" (click)="recoverPassword()">
+                    Enviar Mail de Recuperación
+                </button>
+            </div>
+        </div>
+    </div>
+</ng-template>

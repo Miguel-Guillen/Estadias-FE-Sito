@@ -1,0 +1,142 @@
+<app-navbar></app-navbar>
+<div class="groups-container my-4">
+    <h4>Grupos</h4>
+
+    <!-- formulario de registro de grupo -->
+    <div class="p-3">
+        <h5 class="mb-4 py-2 border-bottom">Agregar nuevo grupo</h5>
+        <form [formGroup]="forms" (ngSubmit)="addGroup(forms.value)">
+            <div class="row my-3">
+                <div class="col-6">
+                    <label class="form-label">Unidad Academica <span class="text-danger">*</span> </label>
+                    <select formControlName="unidad_academica" class="form-select">
+                        <option value="Seleccionar">Seleccionar</option>
+                        <option value="Universidad Tecnologica de Aguascalientes">Universidad Tecnologica de Aguascalientes</option>
+                        <option value="Otro">Otro</option>
+                    </select>
+                    <span *ngIf="unidad_academica?.value == 'Seleccionar' && formValid === false"
+                    class="text-danger ms-2">Seleccione la unidad academica</span>
+                </div>
+                <div class="col-6">
+                    <label class="form-label">Carrera <span class="text-danger">*</span> </label>
+                    <select formControlName="carrera" class="form-select">
+                        <option value="Seleccionar">Seleccionar</option>
+                        <option value="Ing. en Desarrollo y Gestion de Software">Ing. en Desarrollo y Gestion de Software</option>
+                        <option value="Otro">Otro</option>
+                    </select>
+                    <span *ngIf="carrera?.value == 'Seleccionar' && formValid === false"
+                    class="text-danger ms-2">Seleccione la carrera</span>
+                </div>
+            </div>
+            <div class="row my-3">
+                <div class="col-6">
+                    <label class="form-label">Especialidad <span class="text-danger">*</span> </label>
+                    <select formControlName="especialidad" class="form-select">
+                        <option value="Seleccionar">Seleccionar</option>
+                        <option value="Ing. en Desarrollo y Gestion de Software">Ing. en Desarrollo y Gestion de Software</option>
+                        <option value="Otro">Otro</option>
+                    </select>
+                    <span *ngIf="especialidad?.value == 'Seleccionar' && formValid === false"
+                    class="text-danger ms-2">Seleccione la especialidad</span>
+                </div>
+                <div class="col-6">
+                    <label class="form-label">Periodo <span class="text-danger">*</span> </label>
+                    <select formControlName="periodo" class="form-select">
+                        <option value="Seleccionar">Seleccionar</option>
+                        <option value="Enero - Abril 2022">Enero - Abril 2022</option>
+                        <option value="Mayo - Agosto 2022">Mayo - Agosto 2022</option>
+                        <option value="Agosto - Diciembre 2022">Agosto - Diciembre 2022</option>
+                        <option value="Enero - Abril 2023">Enero - Abril 2023</option>
+                        <option value="Mayo - Agosto 2023">Mayo - Agosto 2023</option>
+                        <option value="Agosto - Diciembre 2023">Agosto - Diciembre 2023</option>
+                        <option value="Otro">Otro</option>
+                    </select>
+                    <span *ngIf="periodo?.value == 'Seleccionar' && formValid === false"
+                    class="text-danger ms-2">Seleccione el periodo</span>
+                </div>
+            </div>
+            <div class="row my-3">
+                <div class="col-6">
+                    <label class="form-label">Cuatrimestre <span class="text-danger">*</span> </label>
+                    <select formControlName="cuatrimestre" class="form-select">
+                        <option value="Seleccionar">Seleccionar</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="Otro">Otro</option>
+                    </select>
+                    <span *ngIf="cuatrimestre?.value == 'Seleccionar' && formValid === false"
+                    class="text-danger ms-2">Seleccione el cuatrimestre</span>
+                </div>
+                <div class="col-6">
+                    <label class="form-label">Plan de Estudio <span class="text-danger">*</span> </label>
+                    <select formControlName="plan_estudio" class="form-select">
+                        <option value="Seleccionar">Seleccionar</option>
+                        <option value="IDGS 18 20">IDGS 18 20</option>
+                        <option value="Otro">Otro</option>
+                    </select>
+                    <span *ngIf="plan_estudio?.value == 'Seleccionar' && formValid === false"
+                    class="text-danger ms-2">Seleccione el plan de estudio</span>
+                </div>
+            </div>
+            <div class="row my-3">
+                <div class="col-6">
+                    <label class="form-label">Turno <span class="text-danger">*</span> </label>
+                    <select formControlName="turno" class="form-select">
+                        <option value="Seleccionar">Seleccionar</option>
+                        <option value="Matutino">Matutino</option>
+                        <option value="Vespertino">Vespertino</option>
+                        <option value="Otro">Otro</option>
+                    </select>
+                    <span *ngIf="turno?.value == 'Seleccionar' && formValid === false"
+                    class="text-danger ms-2">Seleccione el Turno</span>
+                </div>
+                <div class="col-6">
+                    <label class="form-label">Nombre <span class="text-danger">*</span> </label>
+                    <input formControlName="nombre" class="form-control" type="text">
+                    <span *ngIf="nombre?.errors?.['required'] && formValid === false"
+                    class="text-danger ms-2">Se requiere el nombre</span>
+                </div>
+            </div>
+            <button class="btn btn-outline-secondary" (click)="reset()" type="button">Limpiar</button>
+            <button class="btn btn-success float-end" type="submit">Guardar</button>
+        </form>
+    </div>
+
+    <!-- listado de grupos -->
+    <div class="mt-5">
+        <h5 class="mb-4 py-2 border-bottom">Listado de grupos</h5>
+        <div class="table-container">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Nombre</th>
+                        <th>Carrera</th>
+                        <th>Periodo</th>
+                        <th>Cuatrimestre</th>
+                        <th>Plan de estudio</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let group of groups">
+                        <td>{{ group.no }}</td>
+                        <td>{{ group.nombre }}</td>
+                        <td>{{ group.carrera }}</td>
+                        <td>{{ group.periodo }}</td>
+                        <td>{{ group.cuatrimestre }}</td>
+                        <td>{{ group.plan_estudio }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
