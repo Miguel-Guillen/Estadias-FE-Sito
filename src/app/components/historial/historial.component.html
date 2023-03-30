@@ -1,0 +1,163 @@
+<div class="container px-4">
+    <c-nav class="justify-content-end mt-2">
+        <button class="btn border me-2" (click)="openModalCredit()">
+            <svg cIcon name="cil-bell" size="md" title="notification"></svg>
+        </button>
+        <button class="btn border me-2" (click)="openModalDebts()">
+            <svg cIcon name="cil-dollar" size="md" title="notification"></svg>
+        </button>
+        <button class="btn border me-2">
+            <svg cIcon name="cil-print" size="md" title="notification"></svg>
+        </button>
+        <button class="btn border">
+            <svg cIcon name="cil-account-logout" size="md" title="notification"></svg>
+        </button>
+    </c-nav>
+
+    <h5 class="subtitle ms-1">Historial de calificacion por alumno</h5>
+
+    <div *ngFor="let cal of grades.calificaciones" class="mt-3 mb-4">
+        <div class="p-2 c-header">
+            <span class="me-4">Cuatrimestre {{ cal.cuatrimestre }}</span> <span>{{ cal.periodo }}</span>
+        </div>
+        <div class="py-1 ps-2 card-header bg-light border rounded-top">
+            <span class="me-5">Grupo</span>
+            <span class="ms-5">{{ cal.grupo }}</span>
+        </div>
+
+        <table cTable borderless [responsive]="true" [striped]="true" align="middle"
+        class="border mb-0">
+            <thead cTableColor="primary">
+                <tr class="border-bottom">
+                    <th>N</th>
+                    <th class="text-center">Materia</th>
+                    <th>U1</th>
+                    <th>U2</th>
+                    <th>U3</th>
+                    <th>U4</th>
+                    <th>U5</th>
+                    <th>U6</th>
+                    <th>U7</th>
+                    <th>U8</th>
+                    <th>U9</th>
+                    <th>U10</th>
+                    <th>U11</th>
+                    <th>CF</th>
+                    <th>ES</th>
+                    <th>F</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let mat of cal.materias; let i = index">
+                    <td>{{ i+1 }}</td>
+                    <td class="text-center col-4 px-3">{{ mat.nombre }}</td>
+                    <td class="text-center">{{ mat.calificacion[0] }}</td>
+                    <td class="text-center">{{ mat.calificacion[1] }}</td>
+                    <td class="text-center">{{ mat.calificacion[2] }}</td>
+                    <td class="text-center">{{ mat.calificacion[3] == undefined ? '' : mat.calificacion[3] }}</td>
+                    <td class="text-center">{{ mat.calificacion[4] == undefined ? '' : mat.calificacion[4] }}</td>
+                    <td class="text-center">{{ mat.calificacion[5] == undefined ? '' : mat.calificacion[5] }}</td>
+                    <td class="text-center">{{ mat.calificacion[6] == undefined ? '' : mat.calificacion[6] }}</td>
+                    <td class="text-center">{{ mat.calificacion[7] == undefined ? '' : mat.calificacion[7] }}</td>
+                    <td class="text-center">{{ mat.calificacion[8] == undefined ? '' : mat.calificacion[8] }}</td>
+                    <td class="text-center">{{ mat.calificacion[9] == undefined ? '' : mat.calificacion[9] }}</td>
+                    <td class="text-center">{{ mat.calificacion[10] == undefined ? '' : mat.calificacion[10] }}</td>
+                    <td [ngClass]="mat.cf > 7.9 ? 'text-success' : 'text-danger' " class="text-center">{{ mat.cf }}</td>
+                    <td [ngClass]="{'text-success' : mat.es == 'AO'}" class="text-center">{{ mat.es }}</td>
+                    <td class="text-center">{{ mat.f }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<c-modal [visible]="modalCredits" (visibleChange)="handleChange($event, 'credits')" size="lg">
+    <c-modal-header>
+        <h6 cModalTitle>Creditos Paraescolares - {{ grades.nombre.toUpperCase() }}</h6>
+        <button (click)="openModalCredit()" cButtonClose class="btn">
+            <svg cIcon name="cil-x" size="md" title="close"></svg>
+        </button>
+    </c-modal-header>
+    <c-modal-body>
+        <table cTable borderless [responsive]="true" [striped]="true" align="middle"
+        class="border mb-0">
+            <thead cTableColor="primary">
+                <tr class="border-bottom">
+                    <th>No.</th>
+                    <th class="text-center">Actividad</th>
+                    <th class="text-center">Periodo</th>
+                    <th class="text-center">Creditos</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let cred of grades.creditos">
+                    <td>{{ cred.no }}</td>
+                    <td class="text-center">{{ cred.actividad }}</td>
+                    <td class="text-center">{{ cred.periodo }}</td>
+                    <td class="text-center">{{ cred.creditos }}</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3">Creditos Acumulados</td>
+                    <td class="text-center text-light bg-success">{{ totalCredits }}</td>
+                </tr>
+            </tfoot>
+        </table>
+        <h6 class="ms-2 mt-3 mb-2">(120 créditos) Cúbrelos antes de egresar de TSU</h6>
+    </c-modal-body>
+    <c-modal-footer>
+        <button cButton class="btn border" (click)="download()">
+            <svg cIcon name="cil-print" size="md" title="notification"></svg>
+        </button>
+        <button cButton class="btn border" (click)="openModalCredit()">
+            <svg cIcon name="cil-x" size="md" title="close" class="me-1"></svg>
+            Cerrar
+        </button>
+    </c-modal-footer>
+</c-modal>
+
+<c-modal [visible]="modalDebts" (visibleChange)="handleChange($event, 'debts')" size="lg">
+    <c-modal-header>
+        <h5 cModalTitle>Modal title</h5>
+        <button (click)="openModalDebts()" cButtonClose class="btn">
+            <svg cIcon name="cil-x" size="md" title="close" class="me-1"></svg>
+        </button>
+    </c-modal-header>
+    <c-modal-body>
+        <table cTable borderless [responsive]="true" [striped]="true" align="middle"
+        class="border mb-0">
+            <thead cTableColor="primary">
+                <tr class="border-bottom">
+                    <th>Folio</th>
+                    <th class="text-center">Adeudo</th>
+                    <th class="text-center">Fecha</th>
+                    <th class="text-center">Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let debt of debts">
+                    <td class="text-cneter">{{ debt.folio }}</td>
+                    <td class="text-center">{{ debt.adeudo }}</td>
+                    <td class="text-center">{{ debt.fecha | date }}</td>
+                    <td class="text-center">{{ debt.total | currency }}</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3">Adeudo Total</td>
+                    <td class="text-center text-light bg-success">{{ totalDebts | currency }}</td>
+                </tr>
+            </tfoot>
+        </table>
+    </c-modal-body>
+    <c-modal-footer>
+        <button cButton class="btn border" (click)="download()">
+            <svg cIcon name="cil-print" size="md" title="notification"></svg>
+        </button>
+        <button cButton class="btn border" (click)="openModalDebts()">
+            <svg cIcon name="cil-x" size="md" title="close" class="me-1"></svg>
+            Cerrar
+        </button>
+    </c-modal-footer>
+</c-modal>

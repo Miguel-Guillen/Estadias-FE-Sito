@@ -15,20 +15,20 @@
     
                     <div class="mt-3">
                         <form [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">
-                            <div class="d-flex my-3">
-                                <span class="border rounded-start icon">
-                                    <i class="fas fa-user"></i>
+                            <c-input-group class="mb-3">
+                                <span cInputGroupText id="user">
+                                    <svg cIcon name="cil-user" size="md" title="user"></svg>
                                 </span>
-                                <input formControlName="user" class="form-control" type="text" 
-                                placeholder="Usuario" maxlength="10">
-                            </div>
-                            <div class="d-flex my-3">
-                                <span class="border rounded-start icon">
-                                    <i class="fas fa-lock"></i>
+                                <input cFormControl aria-describedby="user" formControlName="user" 
+                                placeholder="Usuario" maxlength="10" type="text"/>
+                            </c-input-group>
+                            <c-input-group class="mb-3">
+                                <span cInputGroupText id="pass">
+                                    <svg cIcon name="cil-lock-locked" size="md" title="pass"></svg>
                                 </span>
-                                <input formControlName="password" class="form-control" type="password"
-                                placeholder="Contraseña" maxlength="50">
-                            </div>
+                                <input cFormControl aria-describedby="pass" formControlName="password" 
+                                placeholder="Contraseña" maxlength="50" type="password"/>
+                            </c-input-group>
                             <div class="d-flex justify-content-between align-items-center mt-3">
                                 <button class="btn btn-primary" type="submit">Iniciar Sesión</button>
                                 <button class="btn text-primary" type="button" data-bs-toggle="modal" 
@@ -58,24 +58,25 @@
             </div>
             <ng-container *ngIf="!show; else forgottenPass">
                 <div class="modal-body">
-                    <div *ngIf="formValid == false" class="alert alert-danger" role="alert">
+                    <div *ngIf="formValid == false && recoverForm.valid" class="alert alert-danger" role="alert">
                         Por favor verifícalo, he inténtalo nuevamente
                     </div>
                     <p class="text-info">Mi cuenta aparece desactivada:</p>
                     <form [formGroup]="recoverForm" (ngSubmit)="recoverAccount(recoverForm.value)">
-                        <div class="d-flex my-3">
-                            <span class="border rounded-start icon">
-                                <i class="fas fa-user"></i>
+                        <c-input-group class="mb-3">
+                            <span cInputGroupText id="users">
+                                <svg cIcon name="cil-user" size="md" title="users"></svg>
                             </span>
-                            <input formControlName="user" class="form-control" type="text" 
-                            placeholder="Ingresa el usuario con el que ingresas al sistema" maxlength="10">
-                        </div>
-                        <div class="d-flex my-3">
-                            <span class="border rounded-start icon">
-                                <i class="fas fa-calendar"></i>
+                            <input cFormControl aria-describedby="users" formControlName="user" type="text" 
+                            placeholder="Introduce el usuario con el que accedes al sistema" maxlength="10"/>
+                        </c-input-group>
+                        <c-input-group class="mb-3">
+                            <span cInputGroupText id="dated">
+                                <svg cIcon name="cil-calendar" size="md" title="dated"></svg>
                             </span>
-                            <input formControlName="date" class="form-control" type="date">
-                        </div>
+                            <input cFormControl aria-describedby="dated" formControlName="date" type="date" 
+                            placeholder="Por seguridad, introduce tu fecha de nacimiento"/>
+                        </c-input-group>
                         <div class="d-flex justify-content-between align-items-center mt-3">
                             <button class="btn btn-purple btn-sm" type="submit">
                                 <i class="fas fa-check me-1"></i>
@@ -100,18 +101,18 @@
 
 <ng-template #forgottenPass>
     <div class="modal-body">
-        <div class="bg-purple mt-3 p-3">
+        <div class="bg-purple mt-2 p-3">
             <h6>Recuperar Contraseña</h6>
             <p class="mt-2 mb-1">Inserte su matricula, haz clic en la casilla y haz clic en enviar email</p>
         </div>
 
-        <div class="d-flex mt-3">
-            <span class="border rounded-start icon">
-                <i class="fas fa-user"></i>
+        <c-input-group class="my-3">
+            <span cInputGroupText>
+                <svg cIcon name="cil-user" size="md" title="user"></svg>
             </span>
-            <input [(ngModel)]="matricula" class="form-control" type="text" maxlength="10"
-            placeholder="Escribe tu Matricula">
-        </div>
+            <input cFormControl [(ngModel)]="matricula" placeholder="Escribe tu Matricula" 
+            maxlength="10" type="text"/>
+        </c-input-group>
 
         <div class="row my-4">
             <div class="col-6">

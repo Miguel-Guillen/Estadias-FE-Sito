@@ -1,0 +1,38 @@
+<c-sidebar visible fixed="true" color="dark" minimizeWidth="none" class="min-vh-100">
+  <c-sidebar-brand>
+    <c-avatar size="lg" class="me-3"
+    src="../../../assets/img/Universidad-Tecnologica-de-Aguascalientes.jpg.crdownload"></c-avatar>
+    <span class="text-noLight">SITO</span>
+  </c-sidebar-brand>
+  <c-sidebar-nav [navItems]="navItems" dropdownMode="close"></c-sidebar-nav>
+  <c-sidebar-toggler></c-sidebar-toggler>
+</c-sidebar>
+
+<div class="c-wrapper">
+  <div class="c-body">
+
+    <c-header>
+      <c-container fluid>
+        <c-header-brand [routerLink]="['/']" class="text-title">
+          UNIVERSIDAD TECNOLOGICA DE AGUASCALIENTES
+        </c-header-brand>
+        <c-header-nav class="ms-auto">
+          <c-nav-item class="me-2">
+            <c-avatar
+              cTextColor="primary"
+              shape="rounded"
+              size="md"
+              src="../../../assets/img/WhatsApp Image 2021-08-10 at 9.02.28 PM.jpeg"
+              status="success"
+            ></c-avatar>
+          </c-nav-item>
+          <c-nav-item>
+            <a cNavLink [routerLink]="['/login']">Cerrar sesion</a>
+          </c-nav-item>
+        </c-header-nav>
+      </c-container>
+    </c-header>
+
+    <router-outlet></router-outlet>
+  </div>
+</div>
