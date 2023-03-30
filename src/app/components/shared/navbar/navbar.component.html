@@ -1,19 +1,21 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand">Sito</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarText">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/']">Inicio</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/groups']">Grupos</a>
-          </li>
-        </ul>
-      </div>
-      <a class="nav-link" style="color: rgba(255, 255, 255, 0.55);" [routerLink]="['/login']">Cerrar Sesion</a>
-    </div>
-</nav>
+<c-header>
+  <c-container fluid>
+    <c-header-brand [routerLink]="['/']" class="text-title">
+      UNIVERSIDAD TECNOLOGICA DE AGUASCALIENTES
+    </c-header-brand>
+    <c-header-nav class="ms-auto">
+      <c-nav-item class="me-2">
+        <c-avatar
+          cTextColor="primary"
+          shape="rounded"
+          size="md"
+          src="../../../assets/img/WhatsApp Image 2021-08-10 at 9.02.28 PM.jpeg"
+          status="success"
+        ></c-avatar>
+      </c-nav-item>
+      <c-nav-item>
+        <a cNavLink [routerLink]="['/login']">Cerrar sesion</a>
+      </c-nav-item>
+    </c-header-nav>
+  </c-container>
+</c-header>

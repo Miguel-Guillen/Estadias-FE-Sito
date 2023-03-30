@@ -1,0 +1,122 @@
+<div class="container px-4">
+    <c-nav class="justify-content-end mt-2 options">
+        <button class="btn border me-2">
+            <svg cIcon name="cil-file" size="md" title="paper"></svg>
+            <p class="m-0">Nuevo</p>
+        </button>
+        <button class="btn border me-2">
+            <svg cIcon name="cil-save" size="md" title="save"></svg>
+            <p class="m-0">Guardar</p>
+        </button>
+        <button class="btn border me-2">
+            <svg cIcon name="cil-trash" size="md" title="trash"></svg>
+            <p class="m-0">Eliminar</p>
+        </button>
+        <button class="btn border me-2">
+            <svg cIcon name="cil-search" size="md" title="search"></svg>
+            <p class="m-0">Buscar</p>
+        </button>
+        <button class="btn border">
+            <svg cIcon name="cil-notes" size="md" title="search"></svg>
+            <p class="m-0">Reporte</p>
+        </button>
+    </c-nav>
+
+    <c-col class="mt-3 bg-light border rounded p-3">
+        <h6 class="text-title">Agregar periodo</h6><hr>
+        <div class="px-3 py-1">
+            <form cForm [formGroup]="periodyForm" (ngSubmit)="addPeriody(periodyForm.value)"
+            class="periody-form">
+                <div class="mb-2">
+                    <label cLabel>Periodo <span class="text-danger">*</span> </label>
+                    <select formControlName="periodo" cSelect>
+                        <option>Seleccionar</option>
+                        <option *ngFor="let p of datePeriody" [value]="p">{{ p }}</option>
+                    </select>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-6">
+                        <label cLabel>Fecha de inicio <span class="text-danger">*</span> </label>
+                        <input formControlName="fechaInicio" class="form-control" type="date">
+                    </div>
+                    <div class="col-6">
+                        <label cLabel>Fecha de fin <span class="text-danger">*</span> </label>
+                        <input formControlName="fechaFin" class="form-control" type="date">
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-6">
+                        <label cLabel>Fecha de inicio de clases <span class="text-danger">*</span> </label>
+                        <input formControlName="inicioClases" class="form-control" type="date">
+                    </div>
+                    <div class="col-6">
+                        <label cLabel>Fecha de fin de clases <span class="text-danger">*</span> </label>
+                        <input formControlName="finClases" class="form-control" type="date">
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label cLabel>Numero de extraordinarios <span class="text-danger">*</span> </label>
+                    <input cFormControl formControlName="extraordinarios" value="0" type="number" min="0"/>
+                </div>
+                <div>
+                    <c-form-check>
+                        <input cFormCheckInput formControlName="estado" class="mt-1" type="checkbox"/>
+                        <label cFormCheckLabel>Activo</label>
+                    </c-form-check>
+                </div>
+                <div class="d-flex justify-content-end">
+                    <button class="btn border btn-primary" type="submit">
+                        <svg cIcon name="cil-plus" size="md" title="plus" class="me-2"></svg>
+                        <span>Agregar</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </c-col>
+
+    <div class="mt-5">
+        <h6 class="text-title">Busqueda periodo</h6><hr>
+        <div class="mb-4 text-end">
+            <label cLabel>Año del periodo</label>
+            <select cSelect [(ngModel)]="filter" class="select-periody ms-4">
+                <option>Seleccionar</option>
+                <option value="2020">2020</option>
+                <option value="2021">2021</option>
+                <option value="2022">2022</option>
+                <option value="2023">2023</option>
+                <option value="2024">2024</option>
+            </select>
+        </div>
+
+        <table cTable borderless [responsive]="true" [striped]="true" align="middle"
+        class="border">
+            <thead cTableColor="primary">
+                <tr class="border-bottom">
+                    <th>No.</th>
+                    <th class="text-center">Periodo</th>
+                    <th class="text-center">Fecha de inicio</th>
+                    <th class="text-center">Fecha de fin</th>
+                    <th class="text-center">Fecha de inicio de clases</th>
+                    <th class="text-center">Fecha de fin de clases</th>
+                    <th class="text-center">Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let per of periody | dateFilter: filter">
+                    <td>{{ per.no }}</td>
+                    <td class="text-center">{{ per.periodo }}</td>
+                    <td class="text-center">{{ per.fechaInicio | date: 'mediumDate':'':'es' }}</td>
+                    <td class="text-center">{{ per.fechaFin | date: 'mediumDate':'':'es' }}</td>
+                    <td class="text-center">{{ per.inicioClases | date: 'mediumDate':'':'es' }}</td>
+                    <td class="text-center">{{ per.finClases | date: 'mediumDate':'':'es' }}</td>
+                    <td class="text-center"> 
+                        <c-badge [ngClass]="{'bg-success' : per.estado == 'Activo',
+                        'bg-warning': per.estado == 'Inactivo'}">
+                            {{ per.estado }}
+                        </c-badge>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

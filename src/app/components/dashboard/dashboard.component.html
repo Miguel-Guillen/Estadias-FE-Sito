@@ -10,29 +10,7 @@
 
 <div class="c-wrapper">
   <div class="c-body">
-
-    <c-header>
-      <c-container fluid>
-        <c-header-brand [routerLink]="['/']" class="text-title">
-          UNIVERSIDAD TECNOLOGICA DE AGUASCALIENTES
-        </c-header-brand>
-        <c-header-nav class="ms-auto">
-          <c-nav-item class="me-2">
-            <c-avatar
-              cTextColor="primary"
-              shape="rounded"
-              size="md"
-              src="../../../assets/img/WhatsApp Image 2021-08-10 at 9.02.28 PM.jpeg"
-              status="success"
-            ></c-avatar>
-          </c-nav-item>
-          <c-nav-item>
-            <a cNavLink [routerLink]="['/login']">Cerrar sesion</a>
-          </c-nav-item>
-        </c-header-nav>
-      </c-container>
-    </c-header>
-
+    <app-navbar></app-navbar>
     <router-outlet></router-outlet>
   </div>
 </div>

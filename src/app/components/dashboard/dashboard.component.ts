@@ -17,14 +17,19 @@ export class DashboardComponent implements OnInit {
       iconComponent: { name: 'cil-view-quilt' },
     },
     {
+      name: 'Grupos',
+      url: './groups',
+      iconComponent: { name: 'cil-user' },
+    },
+    {
       name: 'Historial',
       url: './historial',
       iconComponent: { name: 'cil-folder-open' }
     },
     {
-      name: 'Grupos',
-      url: './groups',
-      iconComponent: { name: 'cil-user' },
+      name: 'Periodo Escolar',
+      url: './periodo-escolar',
+      iconComponent: { name: 'cil-book' },
     }
   ] 
 

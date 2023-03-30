@@ -14,6 +14,7 @@ import {
   FooterModule,
   ModalModule,
   FormModule,
+  BadgeModule,
 } from '@coreui/angular';
 import { IconModule } from '@coreui/icons-angular'
 
@@ -24,6 +25,9 @@ import { GroupsComponent } from './components/groups/groups.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HistorialComponent } from './components/historial/historial.component';
+import { PeriodoEscolarComponent } from './components/periodo-escolar/periodo-escolar.component';
+
+import { DateFilterPipe } from './core/filters/date-filter.pipe';
 
 @NgModule({
   declarations: [
@@ -32,7 +36,9 @@ import { HistorialComponent } from './components/historial/historial.component';
     LoginComponent,
     NavbarComponent,
     DashboardComponent,
-    HistorialComponent
+    HistorialComponent,
+    PeriodoEscolarComponent,
+    DateFilterPipe
   ],
   imports: [
     BrowserModule,
@@ -51,7 +57,8 @@ import { HistorialComponent } from './components/historial/historial.component';
     CardModule,
     FooterModule,
     ModalModule,
-    FormModule
+    FormModule,
+    BadgeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
