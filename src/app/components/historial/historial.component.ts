@@ -1,4 +1,4 @@
-import { OnInit } from '@angular/core';
+import { ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Component } from '@angular/core';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
@@ -10,11 +10,12 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
   styleUrls: ['./historial.component.scss']
 })
 export class HistorialComponent implements OnInit {
+  @ViewChild('printContent') printContent!: ElementRef;
   grades: any;
   debts: any[] = [];
   modalCredits = false;
   modalDebts = false;
-  
+
   constructor(){}
 
   ngOnInit(): void {
@@ -217,31 +218,36 @@ export class HistorialComponent implements OnInit {
     if(modal == 'debts') this.modalDebts = event;
   }
 
-  download(){
-    const pdf = {
-      content: [
-        {text: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nesciunt harum in voluptates, natus, quidem omnis at quo dolor cumque maiores quae possimus labore, animi error! Soluta suscipit magni culpa doloribus!', style: 'header'},
-        'Prueba de PDF.',
-        {text: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nesciunt harum in voluptates, natus, quidem omnis at quo dolor cumque maiores quae possimus labore, animi error! Soluta suscipit magni culpa doloribus!', style: 'subheader'},
-        {text: '\n'},
-        {
-          style: 'tableExample',
-          table: {
-            body: [
-              ['No.', 'Actividad', 'Periodo', 'Creditos'],
-              ['1', 'Ajedrez Mixto', '2019 ENERO - ABRIL', '10'],
-              ['2', 'Matematicas Curso', '2019 MAYO - SEPTIEMBRE', '23'],
-              ['3', 'Ingles Curso', '2019 SEPTIEMBRE - DICIEMBRE', '0']
-            ]
+  download(value?: any){
+    let pdf;
+    if(value < 1 || value == undefined){
+      pdf = {
+        content: [
+          {text: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nesciunt harum in voluptates, natus, quidem omnis at quo dolor cumque maiores quae possimus labore, animi error! Soluta suscipit magni culpa doloribus!', style: 'header'},
+          'Prueba de PDF.',
+          {text: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nesciunt harum in voluptates, natus, quidem omnis at quo dolor cumque maiores quae possimus labore, animi error! Soluta suscipit magni culpa doloribus!', style: 'subheader'},
+          {text: '\n'},
+          {
+            style: 'tableExample',
+            table: {
+              body: [
+                ['No.', 'Actividad', 'Periodo', 'Creditos'],
+                ['1', 'Ajedrez Mixto', '2019 ENERO - ABRIL', '10'],
+                ['2', 'Matematicas Curso', '2019 MAYO - SEPTIEMBRE', '23'],
+                ['3', 'Ingles Curso', '2019 SEPTIEMBRE - DICIEMBRE', '0']
+              ]
+            }
           }
+        ],
+        styles: {},
+        defaultStyle: {
+          fontSize: 10.5,
+          lineHeight: 1.3,
+          margin: 80
         }
-      ],
-      styles: {},
-      defaultStyle: {
-        fontSize: 10.5,
-        lineHeight: 1.3,
-        margin: 80
       }
+    }else {
+      window.print();
     }
 
     const docPdf = pdfMake.createPdf(pdf);

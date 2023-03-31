@@ -28,6 +28,7 @@ import { HistorialComponent } from './components/historial/historial.component';
 import { PeriodoEscolarComponent } from './components/periodo-escolar/periodo-escolar.component';
 
 import { DateFilterPipe } from './core/filters/date-filter.pipe';
+import { GrupoSeguridadComponent } from './components/grupo-seguridad/grupo-seguridad.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { DateFilterPipe } from './core/filters/date-filter.pipe';
     DashboardComponent,
     HistorialComponent,
     PeriodoEscolarComponent,
-    DateFilterPipe
+    DateFilterPipe,
+    GrupoSeguridadComponent
   ],
   imports: [
     BrowserModule,

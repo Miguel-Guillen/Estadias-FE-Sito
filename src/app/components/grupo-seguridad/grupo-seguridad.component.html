@@ -1,0 +1,76 @@
+<div class="container px-4 mt-4">
+    <h6 class="text-title ms-1">Agregar grupo de seguridad</h6><hr>
+    <div class="mb-5">
+        <form cForm [formGroup]="groupForm" (ngSubmit)="addGroup(groupForm.value)"
+        class="group-form">
+            <div class="mb-3">
+                <label cLabel>Clave</label>
+                <input cFormControl formControlName="no" type="number" min="0">
+            </div>
+            <div class="row mb-3">
+                <div class="col-6">
+                    <label cLabel>Nombre <span class="text-danger">*</span> </label>
+                    <input cFormControl formControlName="nombre" type="text">
+                </div>
+                <div class="col-6">
+                    <label cLabel>Tiempo de inicio sesion <span class="text-danger">*</span> </label>
+                    <input cFormControl formControlName="sesion" type="number" min="0">
+                </div>
+            </div>
+            <div>
+                <c-form-check>
+                    <input cFormCheckInput formControlName="estado" class="mt-1" type="checkbox"/>
+                    <label cFormCheckLabel>Activo</label>
+                </c-form-check>
+            </div>
+            <div class="d-flex justify-content-end">
+                <button class="btn border me-2" type="submit">
+                    <svg cIcon name="cil-save" size="md" title="save" class="me-2"></svg>
+                    <span>Agregar</span>
+                </button>
+                <button class="btn border" (click)="groupForm.reset()" type="button">
+                    <svg cIcon name="cil-ban" size="md" title="ban" class="me-2"></svg>
+                    <span>Cancelar</span>
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <table cTable borderless [responsive]="true" [striped]="true" align="middle"
+        class="border group-table">
+            <thead cTableColor="primary">
+                <tr class="border-bottom">
+                    <th></th>
+                    <th></th>
+                    <th class="text-center">No</th>
+                    <th class="text-center">Nombre</th>
+                    <th class="text-center">Tiempo de Sesíon</th>
+                    <th class="text-center">Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let group of groups">
+                    <td>
+                        <button class="btn border" (click)="deleteGroup(group.no)">
+                            <svg cIcon name="cil-trash" size="md" title="trash"></svg>
+                        </button>
+                    </td>
+                    <td>
+                        <c-form-check>
+                            <input cFormCheckInput [(ngModel)]="group.estado" type="checkbox"
+                            [checked]="group.estado"/>
+                        </c-form-check>
+                    </td>
+                    <td class="text-center">{{ group.no }}</td>
+                    <td class="text-center">{{ group.nombre }}</td>
+                    <td class="text-center">{{ group.sesion }}</td>
+                    <td class="text-center">
+                        <c-badge [ngClass]="{'bg-success' : group.estado == true,
+                        'bg-danger': group.estado == false}">
+                            {{ group.estado == true ? 'Activo' : 'Inactivo' }}
+                        </c-badge>
+                    </td>
+                </tr>
+            </tbody>
+    </table>
+</div>

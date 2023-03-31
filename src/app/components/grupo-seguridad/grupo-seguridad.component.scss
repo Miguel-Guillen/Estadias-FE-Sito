@@ -1,0 +1,13 @@
+.group-table {
+    
+    td { 
+        font-size: 14px;
+
+        button { background-color: rgba(30, 30, 30, 0.35) !important; }
+    }
+    th { font-size: 13px; }
+}
+
+label, .group-form option, .group-form select, .group-form input, .group-form button {
+    font-size: 14px;
+}

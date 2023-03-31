@@ -30,6 +30,11 @@ export class DashboardComponent implements OnInit {
       name: 'Periodo Escolar',
       url: './periodo-escolar',
       iconComponent: { name: 'cil-book' },
+    },
+    {
+      name: 'Grupo Seguridad',
+      url: './grupo-seguridad',
+      iconComponent: { name: 'cil-description' },
     }
   ] 
 
